@@ -15,6 +15,14 @@ const mockTags = [
     totalUses: 142,
     lastSeen: '14:32:15',
     type: 'Ferramenta Tipo A',
+    location: 'Estoque',
+    history: [
+      { location: 'Estoque', action: 'entrada' as const, timestamp: '2026-03-15T14:32:15' },
+      { location: 'Produção', action: 'saida' as const, timestamp: '2026-03-15T12:15:30' },
+      { location: 'Produção', action: 'entrada' as const, timestamp: '2026-03-15T09:45:20' },
+      { location: 'Estoque', action: 'saida' as const, timestamp: '2026-03-15T09:30:10' },
+      { location: 'Estoque', action: 'entrada' as const, timestamp: '2026-03-14T18:20:00' },
+    ],
   },
   {
     id: 'RFID-E5F6G7H8',
@@ -23,6 +31,13 @@ const mockTags = [
     totalUses: 89,
     lastSeen: '14:30:42',
     type: 'Ferramenta Tipo B',
+    location: 'Lavanderia',
+    history: [
+      { location: 'Lavanderia', action: 'entrada' as const, timestamp: '2026-03-15T14:30:42' },
+      { location: 'Frios', action: 'saida' as const, timestamp: '2026-03-15T11:20:15' },
+      { location: 'Frios', action: 'entrada' as const, timestamp: '2026-03-15T08:10:30' },
+      { location: 'Estoque', action: 'saida' as const, timestamp: '2026-03-15T08:00:00' },
+    ],
   },
   {
     id: 'RFID-I9J0K1L2',
@@ -31,6 +46,12 @@ const mockTags = [
     totalUses: 267,
     lastSeen: '14:29:08',
     type: 'Ferramenta Tipo A',
+    location: 'Produção',
+    history: [
+      { location: 'Produção', action: 'entrada' as const, timestamp: '2026-03-15T14:29:08' },
+      { location: 'Expedição', action: 'saida' as const, timestamp: '2026-03-15T13:45:22' },
+      { location: 'Expedição', action: 'entrada' as const, timestamp: '2026-03-15T10:30:15' },
+    ],
   },
   {
     id: 'RFID-M3N4O5P6',
@@ -39,6 +60,12 @@ const mockTags = [
     totalUses: 34,
     lastSeen: '12:15:33',
     type: 'Ferramenta Tipo C',
+    location: 'Estoque',
+    history: [
+      { location: 'Estoque', action: 'entrada' as const, timestamp: '2026-03-15T12:15:33' },
+      { location: 'Produção', action: 'saida' as const, timestamp: '2026-03-14T16:20:10' },
+      { location: 'Produção', action: 'entrada' as const, timestamp: '2026-03-14T14:10:00' },
+    ],
   },
   {
     id: 'RFID-Q7R8S9T0',
@@ -47,6 +74,13 @@ const mockTags = [
     totalUses: 156,
     lastSeen: '14:31:52',
     type: 'Ferramenta Tipo B',
+    location: 'Frios',
+    history: [
+      { location: 'Frios', action: 'entrada' as const, timestamp: '2026-03-15T14:31:52' },
+      { location: 'Lavanderia', action: 'saida' as const, timestamp: '2026-03-15T13:00:00' },
+      { location: 'Lavanderia', action: 'entrada' as const, timestamp: '2026-03-15T11:45:30' },
+      { location: 'Frios', action: 'saida' as const, timestamp: '2026-03-15T10:00:00' },
+    ],
   },
   {
     id: 'RFID-U1V2W3X4',
@@ -55,6 +89,12 @@ const mockTags = [
     totalUses: 78,
     lastSeen: '14:28:19',
     type: 'Ferramenta Tipo D',
+    location: 'Expedição',
+    history: [
+      { location: 'Expedição', action: 'entrada' as const, timestamp: '2026-03-15T14:28:19' },
+      { location: 'Produção', action: 'saida' as const, timestamp: '2026-03-15T12:30:45' },
+      { location: 'Produção', action: 'entrada' as const, timestamp: '2026-03-15T09:15:20' },
+    ],
   },
   {
     id: 'RFID-Y5Z6A7B8',
@@ -63,6 +103,13 @@ const mockTags = [
     totalUses: 203,
     lastSeen: '14:27:44',
     type: 'Ferramenta Tipo A',
+    location: 'Estoque',
+    history: [
+      { location: 'Estoque', action: 'entrada' as const, timestamp: '2026-03-15T14:27:44' },
+      { location: 'Expedição', action: 'saida' as const, timestamp: '2026-03-15T11:50:30' },
+      { location: 'Expedição', action: 'entrada' as const, timestamp: '2026-03-15T09:20:15' },
+      { location: 'Estoque', action: 'saida' as const, timestamp: '2026-03-15T08:45:00' },
+    ],
   },
   {
     id: 'RFID-C9D0E1F2',
@@ -71,6 +118,12 @@ const mockTags = [
     totalUses: 98,
     lastSeen: '14:26:07',
     type: 'Ferramenta Tipo C',
+    location: 'Produção',
+    history: [
+      { location: 'Produção', action: 'entrada' as const, timestamp: '2026-03-15T14:26:07' },
+      { location: 'Frios', action: 'saida' as const, timestamp: '2026-03-15T13:15:20' },
+      { location: 'Frios', action: 'entrada' as const, timestamp: '2026-03-15T10:40:10' },
+    ],
   },
 ];
 
@@ -184,10 +237,10 @@ export default function App() {
                       className="w-3 h-3 rounded-full"
                       style={{
                         backgroundColor: [
-                          'hsl(var(--chart-1))',
-                          'hsl(var(--chart-2))',
-                          'hsl(var(--chart-3))',
-                          'hsl(var(--chart-4))',
+                          '#0072B2',
+                          '#E69F00',
+                          '#009E73',
+                          '#F0E442',
                         ][index],
                       }}
                     />

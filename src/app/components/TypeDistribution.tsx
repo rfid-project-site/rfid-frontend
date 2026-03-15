@@ -9,12 +9,15 @@ interface TypeDistributionProps {
   data: TypeData[];
 }
 
+// Cores adequadas para daltônicos (Paleta de Paul Tol)
 const COLORS = [
-  'hsl(var(--chart-1))',
-  'hsl(var(--chart-2))',
-  'hsl(var(--chart-3))',
-  'hsl(var(--chart-4))',
-  'hsl(var(--chart-5))',
+  '#0072B2', // Azul
+  '#E69F00', // Laranja/Âmbar
+  '#009E73', // Verde
+  '#F0E442', // Amarelo
+  '#56B4E9', // Azul claro
+  '#D55E00', // Vermelho/Laranja escuro
+  '#CC79A7', // Rosa/Roxo
 ];
 
 export function TypeDistribution({ data }: TypeDistributionProps) {
@@ -22,8 +25,9 @@ export function TypeDistribution({ data }: TypeDistributionProps) {
     <div className="bg-card rounded-lg border border-border p-6">
       <h3 className="mb-4">Distribuição por Tipo</h3>
       <ResponsiveContainer width="100%" height={300}>
-        <PieChart>
+        <PieChart id="type-pie-chart">
           <Pie
+            id="pie-type-distribution"
             data={data}
             cx="50%"
             cy="50%"
@@ -34,7 +38,7 @@ export function TypeDistribution({ data }: TypeDistributionProps) {
             dataKey="value"
           >
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell key={`cell-${entry.name}-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
           <Tooltip
@@ -44,7 +48,7 @@ export function TypeDistribution({ data }: TypeDistributionProps) {
               borderRadius: '0.5rem',
             }}
           />
-          <Legend />
+          <Legend id="type-legend" />
         </PieChart>
       </ResponsiveContainer>
     </div>
